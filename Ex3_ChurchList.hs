@@ -19,8 +19,9 @@ infixr 5 .:
 
 -- Hint: Consider how you might implement
 -- append :: [a] -> [a] -> [a]
-cAppend :: CList a -> CList a -> CList a
-cAppend x y = cFoldr x (.:) y
+infixr 5 .++
+(.++) :: CList a -> CList a -> CList a
+x .++ y = cFoldr x (.:) y
 
 unchurch :: CList a -> [a]
 unchurch (CList f) = f (:) [] 

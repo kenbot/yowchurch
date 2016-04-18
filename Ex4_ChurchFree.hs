@@ -79,9 +79,6 @@ cMap f (CFree foldIt) = CFree $ \onWrap onPure ->
 cBind :: CFree f a -> (a -> CFree f b) -> CFree f b
 cBind (CFree foldIt) f = CFree $ \onWrap onPure -> 
   foldIt onWrap (\a -> cFold (f a) onWrap onPure)
-  
-
-
 
 
 -- Instance definition boilerplate. Note that f need not be a Functor!
