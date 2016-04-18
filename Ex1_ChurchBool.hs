@@ -13,22 +13,22 @@ cFalse :: CBool
 cFalse x y = y
 
 cNot :: CBool -> CBool
-cNot cb = cb cFalse cTrue
+cNot cb = undefined
 
 
 infixr 3 .&&
 (.&&) :: CBool -> CBool -> CBool
-(.&&) cb1 cb2 = cb1 cb2 cFalse
+cb1 .&& cb2 = undefined
 
 infixr 2 .||
 (.||) :: CBool -> CBool -> CBool
-(.||) cb1 cb2 = cb1 cTrue cb2
+cb1 .|| cb2 = undefined
 
 unchurch :: CBool -> Bool
-unchurch cb = cb True False
+unchurch = undefined
 
 church :: Bool -> CBool
-church b = if b then cTrue else cFalse
+church = undefined
 
 cShow :: CBool -> String
 cShow = show . unchurch

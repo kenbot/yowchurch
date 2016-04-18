@@ -10,29 +10,27 @@ newtype CList a = CList
 
 
 cNil :: CList a  
-cNil = CList (\_ nil -> nil)
+cNil = undefined
 
 
 infixr 5 .:
 (.:) :: a -> CList a -> CList a
-(.:) a (CList f) = CList (\cons nil -> cons a (f cons nil))
+a .: (CList f) = undefined
 
 -- Hint: Consider how you might implement
 -- append :: [a] -> [a] -> [a]
-cAppend :: CList a -> CList a -> CList a
-cAppend x y = cFoldr x (.:) y
+
+infixr 5 .++
+(.++) :: CList a -> CList a -> CList a
+x .++ y = undefined
 
 unchurch :: CList a -> [a]
-unchurch (CList f) = f (:) [] 
+unchurch = undefined
 
 church :: [a] -> CList a
-church [] = cNil
-church (a : as) = a .: (church as)
-
-cShow :: Show a => CList a -> String
-cShow = show . unchurch 
+church = undefined
 
 
 instance Show a => Show (CList a) where 
-  show = cShow
+  show = show . unchurch
   

@@ -15,24 +15,22 @@ c3 f z = f (f (f z))
 c4 f z = f (f (f (f z)))
 
 cSucc :: CNat -> CNat
-cSucc cn f = f . cn f 
+cSucc = undefined 
 
 infixl 6 .+
 (.+) :: CNat -> CNat -> CNat
-(.+) cn1 cn2 f = cn1 f . cn2 f 
+cn1 .+ cn2 = undefined
 
 infixl 7 .*
 (.*) :: CNat -> CNat -> CNat
-(.*) = (.)
+cn1 .* cn2 = undefined
 
 unchurch :: CNat -> Int
-unchurch cn = cn (+1) 0
+unchurch = undefined
 
 -- assuming integers >= 0
 church :: Int -> CNat
-church 0 = c0
-church n = cSucc (church (n - 1))
-
+church = undefined
 
 cShow :: CNat -> String 
 cShow = show . unchurch

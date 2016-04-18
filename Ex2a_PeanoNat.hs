@@ -12,24 +12,18 @@ p4 = Succ p3
 
 infixl 6 .+
 (.+) :: PNat -> PNat -> PNat
-(.+) Zero b = b 
-(.+) (Succ x) b = x .+ (Succ b) 
+pn1 .+ pn2 = undefined
+
 
 infixl 7 .*
 (.*) :: PNat -> PNat -> PNat
-(.*) Zero _ = Zero  
-(.*) (Succ x) b = b .+ (x .* b)
+pn1 .* pn2 = undefined
 
 unpeano :: PNat -> Int
-unpeano Zero = 0
-unpeano (Succ n) = 1 + unpeano n 
+unpeano = undefined
 
 peano :: Int -> PNat
-peano 0 = Zero
-peano n = Succ (peano (n - 1))
-  
-pShow :: PNat -> String
-pShow = show . unpeano
+peano = undefined
 
 instance Show PNat where
-  show = pShow
+  show = show . unpeano
