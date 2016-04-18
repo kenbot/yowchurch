@@ -1,0 +1,22 @@
+name: church
+version: 1.0
+cabal-version: 1.6
+build-type: Simple
+license: AllRightsReserved
+stability: experimental
+Executable church
+  main-is: Main.hs
+  buildable: True
+  build-depends:
+      base -any,
+      free -any,
+      QuickCheck -any,
+      mtl -any,
+      criterion -any
+  other-modules:
+      Tests
+      Ex4_ChurchFree
+      Ex2a_PeanoNat
+      Ex1_ChurchBool
+      Ex3_ChurchList
+      Ex2b_ChurchNat
