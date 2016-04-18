@@ -15,14 +15,13 @@ cFalse x y = y
 cNot :: CBool -> CBool
 cNot cb = cb cFalse cTrue
 
-
 infixr 3 .&&
 (.&&) :: CBool -> CBool -> CBool
-(.&&) cb1 cb2 = cb1 cb2 cFalse
+cb1 .&& cb2 = cb1 cb2 cFalse
 
 infixr 2 .||
 (.||) :: CBool -> CBool -> CBool
-(.||) cb1 cb2 = cb1 cTrue cb2
+cb1 .|| cb2 = cb1 cTrue cb2
 
 unchurch :: CBool -> Bool
 unchurch cb = cb True False

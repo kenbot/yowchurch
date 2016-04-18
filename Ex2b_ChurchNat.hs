@@ -19,7 +19,7 @@ cSucc cn f = f . cn f
 
 infixl 6 .+
 (.+) :: CNat -> CNat -> CNat
-(.+) cn1 cn2 f = cn1 f . cn2 f 
+cn1 .+ cn2 = \f -> cn1 f . cn2 f 
 
 infixl 7 .*
 (.*) :: CNat -> CNat -> CNat

@@ -15,7 +15,7 @@ cNil = CList (\_ nil -> nil)
 
 infixr 5 .:
 (.:) :: a -> CList a -> CList a
-(.:) a (CList f) = CList (\cons nil -> cons a (f cons nil))
+a .: (CList f) = CList (\cons nil -> cons a (f cons nil))
 
 -- Hint: Consider how you might implement
 -- append :: [a] -> [a] -> [a]
@@ -30,10 +30,6 @@ church :: [a] -> CList a
 church [] = cNil
 church (a : as) = a .: (church as)
 
-cShow :: Show a => CList a -> String
-cShow = show . unchurch 
-
 
 instance Show a => Show (CList a) where 
-  show = cShow
-  
+  show = show . unchurch   
