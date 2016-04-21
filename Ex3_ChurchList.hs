@@ -2,8 +2,8 @@
 
 module Ex3_ChurchList where
 
--- Apply to head and tail:  a -> r -> r
--- Return if empty: r
+-- "a -> r -> r" handles a head element and tail list  
+-- "r" handles an empty list
 newtype CList a = CList 
   { cFoldr :: (forall r. (a -> r -> r) -> r -> r)
   }
@@ -23,6 +23,10 @@ infixr 5 .++
 (.++) :: CList a -> CList a -> CList a
 x .++ y = cFoldr x (.:) y
 
+
+cLength :: CList a -> Int
+cLength (CList f) = f (\_ -> (+ 1)) 0
+
 unchurch :: CList a -> [a]
 unchurch (CList f) = f (:) [] 
 
@@ -33,3 +37,6 @@ church (a : as) = a .: (church as)
 
 instance Show a => Show (CList a) where 
   show = show . unchurch   
+
+instance Eq a => Eq (CList a) where
+  a == b = unchurch a == unchurch b 

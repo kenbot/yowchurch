@@ -2,33 +2,38 @@
 
 module Ex1_ChurchBool where
 
--- Return if true: r (the 1st one)
--- Return if false: r (the 2nd one)
-type CBool = forall r. r -> r -> r
+-- The 1st "r" handles truth.
+-- The 2nd "r" handles falsity.
+newtype CBool = CBool 
+  {  cFold :: forall r. r -> r -> r
+  }
 
 cTrue :: CBool
-cTrue  x y = x
+cTrue = CBool $ \x y -> x
 
 cFalse :: CBool
-cFalse x y = y
+cFalse = CBool $ \x y -> y
 
 cNot :: CBool -> CBool
-cNot cb = cb cFalse cTrue
+cNot (CBool f) = f cFalse cTrue
 
 infixr 3 .&&
 (.&&) :: CBool -> CBool -> CBool
-cb1 .&& cb2 = cb1 cb2 cFalse
+(CBool ifA) .&& b = ifA b cFalse
 
 infixr 2 .||
 (.||) :: CBool -> CBool -> CBool
-cb1 .|| cb2 = cb1 cTrue cb2
+(CBool ifA) .|| b = ifA cTrue b
 
 unchurch :: CBool -> Bool
-unchurch cb = cb True False
+unchurch (CBool f) = f True False
 
 church :: Bool -> CBool
 church b = if b then cTrue else cFalse
 
-cShow :: CBool -> String
-cShow = show . unchurch
 
+instance Show CBool where 
+  show = show . unchurch
+
+instance Eq CBool where 
+  a == b = unchurch a == unchurch b 

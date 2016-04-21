@@ -27,9 +27,10 @@ unpeano (Succ n) = 1 + unpeano n
 peano :: Int -> PNat
 peano 0 = Zero
 peano n = Succ (peano (n - 1))
-  
-pShow :: PNat -> String
-pShow = show . unpeano
+
 
 instance Show PNat where
-  show = pShow
+  show = show . unpeano
+  
+instance Eq PNat where 
+  a == b = unpeano a == unpeano b 

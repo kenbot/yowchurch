@@ -25,8 +25,11 @@ instance Functor f => Applicative (Free f) where
   pure = Pure
   
 instance Functor f => Monad (Free f) where
+  -- Keep binding down layer by layer, until we reach the....
   (Wrap ffa) >>= f = Wrap $ fmap (>>= f) ffa
-  (Pure a) >>= f = f a
+  
+  -- ...leaf nodes; finally we can substitute them with a new layer.
+  (Pure a) >>= f = f a 
   
 instance Functor f => MonadFree f (Free f) where 
   wrap = Wrap
@@ -36,10 +39,8 @@ foldFree f (Pure a) = pure a
 foldFree f (Wrap ffa) = f ffa >>= foldFree f
 
 
-{-
-   Handle the nested functor: f r -> r
-   Handle the pure value: a -> r
--}
+-- "f r -> r" handles the nested functor.
+-- "a -> r" handles the pure value.
 newtype CFree f a = CFree 
   { cFold :: forall r. (f r -> r) -> (a -> r) -> r
   }
@@ -69,8 +70,8 @@ unchurch free = cFold free Wrap Pure
 
 {-
    Bind and map for CFree are completely different from Free's;
-   We don't need to know anything about f, because we
-   don't touch it.
+   We don't need to know anything about the f type constructor, because we
+   don't touch it. It doesn't even need to be a functor.
 -}
 cMap :: (a -> b) -> CFree f a -> CFree f b
 cMap f (CFree foldIt) = CFree $ \onWrap onPure ->

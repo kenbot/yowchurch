@@ -9,14 +9,15 @@ Executable church
   buildable: True
   build-depends:
       base -any,
-      free -any,
       QuickCheck -any,
-      mtl -any,
-      criterion -any
+      free -any
   other-modules:
-      Tests
       Ex4_ChurchFree
       Ex2a_PeanoNat
       Ex1_ChurchBool
       Ex3_ChurchList
       Ex2b_ChurchNat
+      Test.Ex1Tests
+      Test.Ex2bTests
+      Test.Ex2aTests
+      Test.Ex3Tests
