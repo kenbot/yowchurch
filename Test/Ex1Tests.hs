@@ -4,10 +4,6 @@ module Test.Ex1Tests where
   
 import Test.QuickCheck
 import Ex1_ChurchBool
---import Ex2a_PeanoNat as Ex2a
---import Ex2b_ChurchNat as Ex2b
---import Ex3_ChurchList as Ex3
---import Ex4_ChurchFree as Ex4
 
 
 genCBool :: Gen CBool
