@@ -6,7 +6,7 @@ import Test.QuickCheck
 import Ex2a_PeanoNat
 
 genPNat :: Gen PNat 
-genPNat = elements $ fmap p [0..100]
+genPNat = elements $ fmap p [0..3]
   where 
     p 0 = Zero
     p n = Succ $ p (n-1)
@@ -23,7 +23,10 @@ properties =
   , multComm
   , multAssoc
   , multOneId
-  , distrib
+  , multDistrib
+  , expDistrib1
+  , expDistrib2
+  , expDistrib3
   , iso1
   , iso2
   ]
@@ -50,8 +53,17 @@ multAssoc = counterexample ".* should be associative" prop_multIsAssociative
 multOneId :: Property
 multOneId = counterexample "(.* 1) or (1 .*) should be id" prop_multOneIsIdentity
 
-distrib :: Property
-distrib = counterexample ".* should distribute over .+" prop_distrib
+multDistrib :: Property
+multDistrib = counterexample ".* should distribute over .+" prop_multDistrib
+
+expDistrib1 :: Property
+expDistrib1 = counterexample "(x * y)^m should equal x^m * y^m" prop_expDistrib1
+
+expDistrib2 :: Property
+expDistrib2 = counterexample "x^m * x^n should equal x^(m + n)" prop_expDistrib2
+
+expDistrib3 :: Property
+expDistrib3 = counterexample "(x^m)^n should equal x^(m * n)" prop_expDistrib3
 
 iso1 :: Property
 iso1 = counterexample "peano . unpeano should be id!" prop_peanoIso
@@ -59,6 +71,14 @@ iso1 = counterexample "peano . unpeano should be id!" prop_peanoIso
 iso2 :: Property
 iso2 = counterexample "unpeano . peano should be id!" prop_unpeanoIso
 
+prop_expDistrib1 :: PNat -> PNat -> PNat -> Bool
+prop_expDistrib1 x y m = up ((x .^ m) .* (y .^ m)) == up ((x .* y) .^ m)
+
+prop_expDistrib2 :: PNat -> PNat -> PNat -> Bool
+prop_expDistrib2 a b c = up (a .^ (b .+ c)) == up ((a .^ b) .* (a .^ c)) 
+
+prop_expDistrib3 :: PNat -> PNat -> PNat -> Bool
+prop_expDistrib3 a b c = up ((a .^ b) .^ c) == up (a .^ (b .* c)) 
 
 
 prop_plusIsCommutative :: PNat -> PNat -> Bool
@@ -80,8 +100,8 @@ prop_multOneIsIdentity :: PNat -> Bool
 prop_multOneIsIdentity p = up (p .* p1) == up p && up (p1 .* p) == up p
 
 
-prop_distrib :: PNat -> PNat -> PNat -> Bool
-prop_distrib a b c = up (a .* (b .+ c)) == up ((a .* b) .+ (a .* c))
+prop_multDistrib :: PNat -> PNat -> PNat -> Bool
+prop_multDistrib a b c = up (a .* (b .+ c)) == up ((a .* b) .+ (a .* c))
 
 
 prop_peanoIso :: PNat -> Bool
