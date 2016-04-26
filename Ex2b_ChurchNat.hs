@@ -23,13 +23,13 @@ cSucc :: CNat -> CNat
 cSucc (CNat nTimes) = undefined 
 
 -- Ex 2b.2: Implement Church addition
--- Can you think of more than one way to implement it?
+-- Can you make it run in constant time?
 infixl 6 .+
 (.+) :: CNat -> CNat -> CNat
 (.+) (CNat nTimes) (CNat mTimes) = undefined
 
 -- Ex 2b.3: Implement Church multiplication
--- Can you think of more than one way to implement it?
+-- Can you make it run in constant time? 
 infixl 7 .*
 (.*) :: CNat -> CNat -> CNat
 (.*) n m = undefined
