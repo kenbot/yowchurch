@@ -38,9 +38,9 @@ Functors are an important concept in FP; in programming they allow us to map ove
 
 For example, the free monad of the List functor might contain:
 * `22`  (just a value)
-* `\[1, 22, -5\]`   (a list)
-* `\[\[3,3,5\], \[44, 71, 0\], \[\]\]`   (a list of lists)
-* `\[\[\[1,2,4\],\[8\],\[9,0,3,5\]\], \[\[2,3\],\[5,6\],\[1\]\], \[\[\], \[\]\]\]`   (a list of list of lists)
+* `[1, 22, -5]`   (a list)
+* `[[3,3,5], [44, 71, 0], []]`   (a list of lists)
+* `[[[1,2,4],[8],[9,0,3,5]], [[2,3],[5,6],[1]], [[], []]]`   (a list of list of lists)
 * etc
 
 The free monad of a pair `(a, r)`, polymorphic in `r`, might contain:
