@@ -1,11 +1,11 @@
 Church encoding workshop for YOW Lambda Jam 2016
 =======================
 
-First, install [cabal](https://www.haskell.org/cabal/) from the site, or with `brew install cabal` or whatever.
+First, install [cabal](https://www.haskell.org/cabal/) from the site, or with `brew install cabal-install` or whatever. Next, run `cabal update` to get the latest list of packages.
 
-Then, clone this repo and you should be ready to go.  
+Then, clone this repo and you should be ready to go.
 
-`cabal run` will run the tests, which assess your answers. 
+`cabal run` will run the tests, which assess your answers. If `cabal run` complains about missing dependencies, you may need to run `cabal install --dependencies-only`.
 
 
 Ex 1: Church booleans
