@@ -5,7 +5,7 @@ First, install [cabal](https://www.haskell.org/cabal/) from the site, or with `b
 
 Then, clone this repo and you should be ready to go.
 
-`cabal run` will run the tests, which assess your answers. If `cabal run` complains about missing dependencies, you may need to run `cabal install --dependencies-only`.
+`cabal run` or `stack exec church` will run the tests, which assess your answers. If `cabal run` complains about missing dependencies, you may need to run `cabal install --dependencies-only`.
 
 
 Ex 1: Church booleans
